@@ -1,10 +1,15 @@
 #!/bin/bash
 
+set -xe
+
+if [ "$(eval "echo $REPO_CHECK_ENV_VAR")" = "false" -a "$GO_TRIGGER_USER" = "changes" ]; then
+  echo "Not building. It looks like nothing has changed since last time."
+  exit 0
+fi
+
 destination_repo="$1"
 destination_branch="$2"
 upstream_repo="${3:-https://github.com/gocd/www.go.cd.git}"
-
-set -xe
 
 git remote add upstream "$upstream_repo" && git fetch upstream
 git rebase upstream/master

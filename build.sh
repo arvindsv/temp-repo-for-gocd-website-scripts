@@ -16,6 +16,7 @@ git remote add upstream "$upstream_repo" && git fetch upstream
 git branch branch-with-code
 git reset --hard upstream/master
 git merge branch-with-code
+git log -n 1
 
 git remote add destination "$destination_repo" && git fetch destination
 

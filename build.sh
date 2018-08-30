@@ -12,7 +12,10 @@ destination_branch="$2"
 upstream_repo="${3:-https://github.com/gocd/www.go.cd.git}"
 
 git remote add upstream "$upstream_repo" && git fetch upstream
-git rebase upstream/master
+
+git branch branch-with-code
+git reset --hard upstream/master
+git merge branch-with-code
 
 git remote add destination "$destination_repo" && git fetch destination
 
